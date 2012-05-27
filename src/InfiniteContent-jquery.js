@@ -1,6 +1,6 @@
 /**
  * Create Infinite Content (scrolling) for a page.
- * Uses prototype.js
+ * Uses jQuery
  * 
  * @author Prakhar Birla
  * 
@@ -223,7 +223,7 @@ var InfiniteContent = function(contentContainer, lastPage, loadNextPage, options
 		return true;
 	};
 	
-			/**
+		/**
 		 * Initialize function
 		 */
 		/**
@@ -271,16 +271,6 @@ var InfiniteContent = function(contentContainer, lastPage, loadNextPage, options
 		this.bindScroll = $.proxy( this.bindScroll,this);
 		this.unbindScroll = $.proxy( this.unbindScroll,this);
 		this.scrollEvent = $.proxy( this.scrollEvent,this);
-		
-		/*this.nextPageSuccess = this.nextPageSuccess.bindAsEventListener(this);
-		this.nextPageFaliure = this.nextPageFaliure.bindAsEventListener(this);
-		this.reset = this.reset.bindAsEventListener(this);
-		this.clickButtonEvent = this.clickButtonEvent.bindAsEventListener(this);
-		this.bindScroll = this.bindScroll.bindAsEventListener(this);
-		this.unbindScroll = this.unbindScroll.bindAsEventListener(this);
-		this.scrollEvent = this.scrollEvent.bindAsEventListener(this);*/
-		
-		console.log(this);
 		
 		this.bindScroll();
 		
