@@ -25,4 +25,5 @@ version 0.1
 
 ##License##
 
-Distributed under [the BSD 3-clause license](https://raw.github.com/birla/InfiniteContent).
+Distributed under [the BSD 3-clause license](https://raw.github.com/birla/InfiniteContent) available in the LICENSE file.
+
