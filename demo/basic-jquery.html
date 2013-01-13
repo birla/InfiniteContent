@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>InfiniteContent (jQuery) Demo</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
+  type="text/javascript"></script>
+  <script src="../src/InfiniteContent-jquery.js" type="text/javascript"></script>
+  
+  <script type="text/javascript" defer="defer">
+	function loadPage(page) {
+		page = page || 1;
+		page %= 2;
+		var url = "assets/page" + page + ".html";
+		$.ajax({
+		  url: url,
+		  cache: false
+		}).done(function( html ) {
+		  var new_content = document.createElement('div');
+		  new_content.innerHTML = html +
+			'<hr color="black" />';
+		  $("#content_div").append(new_content);
+		  $("#content_div").trigger('inf:pageSuccess');
+		});
+	}
+	
+	$(document).ready(function() {
+		loadPage();
+		window['ic'] = new InfiniteContent( "#content_div", "#last_page", loadPage, {
+				nextPageTriggerHeight : 100,
+				buttonTriggerHeight : 50,
+				button: true,
+				paginationClasses : ['.next','.prev'],
+				debug : true
+			}, {
+				showLoading: function() {
+					$('#ic_button').html('Loading next page...');
+					$('#ic_button').show();
+				},
+				doneLoading: function() {
+					$('#ic_button').hide();
+				},
+				showButton: function() {
+					$('#ic_button').html('<a onclick="icButtonClick()">SHOW MORE</a>');
+					$('#ic_button').show();
+				},
+				reachedLastPage: function() {
+					$('#ic_button').html('This is it! There\'s no more.');
+					$('#ic_button').show();
+				}
+			}
+		);
+		
+		window['icButtonClick'] = function() {
+			$('#ic_button').hide();
+			$('#content_div').trigger('inf:buttonClick');
+		}
+	});
+  </script>
+ </head>
+ <body>
+ <a name="top" ><h1>Infinite Content - Demo</h1></a><br/>
+ <a class="next">4444</a>
+	<a class="prev">1213</a>
+	<div class="container">
+		<div id="content_div" class="content">
+		</div>
+	</div>
+	<input type="hidden" id="last_page" value="3" />
+	<div class="btt_button">
+		<div id="ic_button" style="display:none;"></div>
+		<div style="float:right"><a href="#top">BACK TO TOP</a></div>
+	</div>
+ </body>
+ </html>
